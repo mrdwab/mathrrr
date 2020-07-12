@@ -1,0 +1,19 @@
+Package: mathrrr
+Title: Basic School-type Math in R
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Ananda",
+           family = "Mahto",
+           role = c("aut", "cre"),
+           email = "mrdwab@gmail.com")
+Description: The mathrrr package includes functions for doing 
+    basic math like the kind you would have done in school. This
+    includes finding factors of a number, converting decimaps to
+    fractions, and so on.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Depends: 
+    R (>= 2.10)
