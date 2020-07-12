@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse a String as a Fraction — parse_fraction • mathrrr</title>
+<title>Convert a Fraction to a Decimal — as_decimal • mathrrr</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Parse a String as a Fraction — parse_fraction" />
-<meta property="og:description" content="When provided a string representing a fraction, parse_fraction will parse
-the provided string to create a list with the class fraction applied to
-it. This will allow the parsed fraction to be used in subsequent calculations." />
+<meta property="og:title" content="Convert a Fraction to a Decimal — as_decimal" />
+<meta property="og:description" content="The as_decimal function parses a string and evaluates the result to
+return a numeric approximation." />
 
 
 
@@ -110,60 +109,30 @@ it. This will allow the parsed fraction to be used in subsequent calculations." 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse a String as a Fraction</h1>
+    <h1>Convert a Fraction to a Decimal</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrdwab/mathrrr/blob/master/R/fractions.R'><code>R/fractions.R</code></a></small>
-    <div class="hidden name"><code>parse_fraction.Rd</code></div>
+    <div class="hidden name"><code>as_decimal.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>When provided a string representing a fraction, <code>parse_fraction</code> will parse
-the provided string to create a <code>list</code> with the class <code>fraction</code> applied to
-it. This will allow the parsed fraction to be used in subsequent calculations.</p>
+    <p>The <code>as_decimal</code> function parses a string and evaluates the result to
+return a numeric approximation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_fraction</span>(<span class='kw'>string</span>, improper = <span class='fl'>TRUE</span>, reduce = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>as_decimal</span>(<span class='kw'>string</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>string</th>
-      <td><p>The input character to be parsed.</p></td>
-    </tr>
-    <tr>
-      <th>improper</th>
-      <td><p>Logical. Should the result be kept as an improper fraction?
-Defaults to <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>reduce</th>
-      <td><p>Logical. Should unreduced fractions be simplified? Defaults
-to <code>TRUE</code>.</p></td>
+      <td><p>The input string to be converted to a decimal.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A formatted <code>list</code> printed with <code>print.fraction()</code>. The <code>list</code>
-includes four elements:</p><ul>
-<li><p><code>whole</code>: The absolute value of the whole number part of the decimal. This
-is <code>NULL</code> if <code>improper = TRUE</code>.</p></li>
-<li><p><code>numerator</code>: The numerator of the resulting fraction.</p></li>
-<li><p><code>denominator</code>: The denominator of the resulting fraction.</p></li>
-<li><p><code>sign</code>: <code>-1</code> if the input is negative; <code>1</code> if the input is positive.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>The string can be entered either as an improper fraction
-(for example, <code>"5/2"</code>) or as a proper fraction (for example,
-<code>"2 1/2"</code>). Depending on how it is entered, the resulting <code>list</code>
-will have a value in <code>"whole"</code> or <code>"whole"</code> will be <code>NULL</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"4/4"</span>)</div><div class='output co'>#&gt; [1] "1"</div><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"4/4"</span>, reduce = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "4/4"</div><div class='input'>
-<span class='fu'>parse_fraction</span>(<span class='st'>"32/4"</span>)</div><div class='output co'>#&gt; [1] "8"</div><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"34/4"</span>, reduce = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "34/4"</div><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"34/4"</span>, reduce = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "17/2"</div><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"34/4"</span>, improper = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "8 1/2"</div><div class='input'>
-<span class='fu'>parse_fraction</span>(<span class='st'>"4 2/4"</span>)</div><div class='output co'>#&gt; [1] "9/2"</div><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"4 2/4"</span>, <span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "18/4"</div><div class='input'><span class='fu'>parse_fraction</span>(<span class='st'>"4 2/4"</span>, <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "4 1/2"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>as_decimal</span>(<span class='st'>"2 3/8"</span>)</div><div class='output co'>#&gt; [1] 2.375</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

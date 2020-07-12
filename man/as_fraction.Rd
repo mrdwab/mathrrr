@@ -27,7 +27,9 @@ is \code{NULL} if \code{improper = TRUE}.
 }
 }
 \description{
-Convert a Decimal to an Approximate Fraction
+The \code{as_fraction} function takes a numeric input and converts it to a fraction.
+The input is first rounded to the desired level of precision (entered as a
+value between 1 and 7).
 }
 \examples{
 as_fraction(3.2454)

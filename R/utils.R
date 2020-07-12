@@ -58,3 +58,8 @@ print.fraction <- function(x, ...) {
     whole = format(x[["whole"]] * x[["sign"]], scientific = FALSE))
   print(out)
 }
+
+#' @export
+print.decimal <- function(x, ...) {
+  print(x[["decimal"]])
+}

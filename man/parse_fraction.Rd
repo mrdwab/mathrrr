@@ -27,7 +27,9 @@ is \code{NULL} if \code{improper = TRUE}.
 }
 }
 \description{
-Parse a String as a Fraction
+When provided a string representing a fraction, \code{parse_fraction} will parse
+the provided string to create a \code{list} with the class \code{fraction} applied to
+it. This will allow the parsed fraction to be used in subsequent calculations.
 }
 \note{
 The string can be entered either as an improper fraction

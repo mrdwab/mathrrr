@@ -1,5 +1,9 @@
 #' Convert a Decimal to an Approximate Fraction
 #'
+#' The `as_fraction` function takes a numeric input and converts it to a fraction.
+#' The input is first rounded to the desired level of precision (entered as a
+#' value between 1 and 7).
+#'
 #' @param number The decimal you want to convert to a fraction.
 #' @param precision The number of digits to round the decimal to before trying
 #' to convert the result to a fraction. Must be greater than 1 but less than 8.
@@ -52,7 +56,32 @@ as_fraction <- function(number, precision = 3, improper = TRUE) {
 }
 NULL
 
+#' Convert a Fraction to a Decimal
+#'
+#' The `as_decimal` function parses a string and evaluates the result to
+#' return a numeric approximation.
+#'
+#' @param string The input string to be converted to a decimal.
+#'
+#' @examples
+#' as_decimal("2 3/8")
+#' @export
+as_decimal <- function(string) {
+  tmp <- parse_fraction(string = string, improper = TRUE, reduce = TRUE)
+  if ("whole" %in% class(tmp)) {
+    out <- tmp[["sign"]] * tmp[["whole"]]
+  } else {
+    out <- tmp[["sign"]] * (tmp[["numerator"]]/tmp[["denominator"]])
+  }
+  structure(list(decimal = out, fraction = tmp), class = c("decimal", "list"))
+}
+NULL
+
 #' Parse a String as a Fraction
+#'
+#' When provided a string representing a fraction, `parse_fraction` will parse
+#' the provided string to create a `list` with the class `fraction` applied to
+#' it. This will allow the parsed fraction to be used in subsequent calculations.
 #'
 #' @param string The input character to be parsed.
 #' @param improper Logical. Should the result be kept as an improper fraction?
