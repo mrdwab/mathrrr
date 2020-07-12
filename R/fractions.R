@@ -64,22 +64,18 @@ NULL
 #'
 #' @param string The input string to be converted to a decimal.
 #'
-#' @return A formatted `list` printed with `print.decimal()`. The `list`
-#' includes four elements (which can be accessed by name):
-#' * `decimal`: The calculated decimal value.
-#' * `fraction`: The string parsed as a fraction (using [parse_fraction()]).
+#' @return A numeric (possible approximation) of the fraction converted
+#' to a numeric value.
 #' @examples
 #' as_decimal("2 3/8")
 #' @export
 as_decimal <- function(string) {
   tmp <- parse_fraction(string = string, improper = TRUE, reduce = TRUE)
   if ("whole" %in% class(tmp)) {
-    out <- tmp[["sign"]] * tmp[["whole"]]
+    tmp[["sign"]] * tmp[["whole"]]
   } else {
-    out <- tmp[["sign"]] * (tmp[["numerator"]]/tmp[["denominator"]])
+    tmp[["sign"]] * (tmp[["numerator"]]/tmp[["denominator"]])
   }
-  structure(list(decimal = out, fraction = tmp),
-            class = c("list", "decimal"))
 }
 NULL
 
