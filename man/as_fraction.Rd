@@ -23,7 +23,8 @@ includes four elements:
 is \code{NULL} if \code{improper = TRUE}.
 \item \code{numerator}: The numerator of the resulting fraction.
 \item \code{denominator}: The denominator of the resulting fraction.
-\item \code{sign}: \code{-1} if the input is negative; \code{1} if the input is positive.
+\item \code{sign}: \code{-1} if the input is negative; \code{1} if the input is positive; \code{0}
+if the input is zero.
 }
 }
 \description{

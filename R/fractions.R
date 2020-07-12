@@ -15,7 +15,8 @@
 #' is `NULL` if `improper = TRUE`.
 #' * `numerator`: The numerator of the resulting fraction.
 #' * `denominator`: The denominator of the resulting fraction.
-#' * `sign`: `-1` if the input is negative; `1` if the input is positive.
+#' * `sign`: `-1` if the input is negative; `1` if the input is positive; `0`
+#' if the input is zero.
 #' @examples
 #' as_fraction(3.2454)
 #' as_fraction(3.2454, 2, TRUE)
@@ -63,6 +64,10 @@ NULL
 #'
 #' @param string The input string to be converted to a decimal.
 #'
+#' @return A formatted `list` printed with `print.decimal()`. The `list`
+#' includes four elements (which can be accessed by name):
+#' * `decimal`: The calculated decimal value.
+#' * `fraction`: The string parsed as a fraction (using [parse_fraction()]).
 #' @examples
 #' as_decimal("2 3/8")
 #' @export
@@ -73,7 +78,8 @@ as_decimal <- function(string) {
   } else {
     out <- tmp[["sign"]] * (tmp[["numerator"]]/tmp[["denominator"]])
   }
-  structure(list(decimal = out, fraction = tmp), class = c("decimal", "list"))
+  structure(list(decimal = out, fraction = tmp),
+            class = c("list", "decimal"))
 }
 NULL
 

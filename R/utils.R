@@ -61,5 +61,6 @@ print.fraction <- function(x, ...) {
 
 #' @export
 print.decimal <- function(x, ...) {
+  out <- x
   print(x[["decimal"]])
 }

@@ -9,6 +9,14 @@ as_decimal(string)
 \arguments{
 \item{string}{The input string to be converted to a decimal.}
 }
+\value{
+A formatted \code{list} printed with \code{print.decimal()}. The \code{list}
+includes four elements (which can be accessed by name):
+\itemize{
+\item \code{decimal}: The calculated decimal value.
+\item \code{fraction}: The string parsed as a fraction (using \code{\link[=parse_fraction]{parse_fraction()}}).
+}
+}
 \description{
 The \code{as_decimal} function parses a string and evaluates the result to
 return a numeric approximation.
