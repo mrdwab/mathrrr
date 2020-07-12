@@ -122,6 +122,7 @@ NULL
 #' parse_fraction("4 2/4", FALSE)
 #' @export
 parse_fraction <- function(string, improper = TRUE, reduce = TRUE) {
+  string <- trimws(string)
   if (!grepl("[ /]", string)) {
     cl <- "whole"
     whole <- abs(as.integer(string))
