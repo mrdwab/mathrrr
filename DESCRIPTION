@@ -19,3 +19,5 @@ Depends:
     R (>= 2.10)
 URL: https://mrdwab.github.io/mathrrr, https://github.com/mrdwab/mathrrr
 BugReports: https://github.com/mrdwab/mathrrr/issues
+Suggests: 
+    testthat
