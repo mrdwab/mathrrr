@@ -74,17 +74,17 @@ NULL
 #' will have a value in `"whole"` or `"whole"` will be `NULL`.
 #'
 #' @examples
-#' parse_fraction("4/4")                   # "1"
-#' parse_fraction("4/4", reduce = FALSE)   # "4/4"
+#' parse_fraction("4/4")
+#' parse_fraction("4/4", reduce = FALSE)
 #'
-#' parse_fraction("32/4")                  # "8"
-#' parse_fraction("34/4", reduce = FALSE)  # "34/4"
-#' parse_fraction("34/4", reduce = TRUE)   # "17/2"
-#' parse_fraction("34/4", improper = FALSE)# "8 1/2"
+#' parse_fraction("32/4")
+#' parse_fraction("34/4", reduce = FALSE)
+#' parse_fraction("34/4", reduce = TRUE)
+#' parse_fraction("34/4", improper = FALSE)
 #'
-#' parse_fraction("4 2/4")                 # "9/2"
-#' parse_fraction("4 2/4", TRUE, FALSE)    # "18/4"
-#' parse_fraction("4 2/4", FALSE)          # "4 1/2"
+#' parse_fraction("4 2/4")
+#' parse_fraction("4 2/4", TRUE, FALSE)
+#' parse_fraction("4 2/4", FALSE)
 #' @export
 parse_fraction <- function(string, improper = TRUE, reduce = TRUE) {
   if (!grepl("[ /]", string)) {
