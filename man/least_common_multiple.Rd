@@ -18,6 +18,10 @@ The \code{least_common_multiple} function takes a set of numbers and
 calculates their least common multiple using the prime factorization
 method.
 }
+\note{
+The absolute values of the input is used in calculating the
+least common multiple.
+}
 \examples{
 least_common_multiple(4, 7, 11)
 }

@@ -47,7 +47,7 @@ NULL
 #' @return A numeric vector either with the repeated prime factorization
 #' of the input or just the unique prime factors of the input.
 #'
-#' NOTE: Returns `NULL` for a value of 1, and generates an error for
+#' @note Returns `NULL` for a value of 1, and generates an error for
 #' values less than 1.
 #'
 #' @examples
@@ -87,22 +87,33 @@ NULL
 #' @return A single integer value representing the least common multiple
 #' of the set of inputs.
 #'
+#' @note The absolute values of the input is used in calculating the
+#' least common multiple.
+#'
 #' @examples
 #' least_common_multiple(4, 7, 11)
 #' @export
 least_common_multiple <- function(...) {
   L <- list(...)
-  l <- sort(unlist(L, use.names = FALSE))
-  l <- l[l != 1]
-  if (all(!max(l) %% l)) {
-    max(l)
+  l <- sort(abs(unique(unlist(L, use.names = FALSE))))
+  if (!.isInteger(l)) stop("
+This function is only defined to be used on integer values")
+  if (any(l == 0)) {
+    0
+  } else if (identical(l, 1)) {
+    1
   } else {
-    out <- lapply(l, prime_factors, unique = FALSE)
-    out <- unique(do.call(rbind, lapply(
-      out, function(y) data.frame(unclass(rle(y))))))
-    out <- out[as.logical(with(
-      out, ave(lengths, values, FUN = function(x) x == max(x)))), ]
-    prod(do.call("^", rev(out)))
+    l <- l[l != 1]
+    if (all(!max(l) %% l)) {
+      max(l)
+    } else {
+      out <- lapply(l, prime_factors, unique = FALSE)
+      out <- unique(do.call(rbind, lapply(
+        out, function(y) data.frame(unclass(rle(y))))))
+      out <- out[as.logical(with(
+        out, ave(lengths, values, FUN = function(x) x == max(x)))), ]
+      prod(do.call("^", rev(out)))
+    }
   }
 }
 NULL

@@ -40,6 +40,8 @@
   list(num, den)
 }
 
+.isInteger <- function(x) all(as.numeric(x) == as.integer(x))
+
 #' @export
 print.fraction <- function(x, ...) {
   cl <- intersect(class(x), c("improper", "proper", "whole"))

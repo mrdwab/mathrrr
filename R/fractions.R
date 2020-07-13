@@ -24,7 +24,7 @@
 #' as_fraction(3.2454, 1, FALSE)
 #' @export
 as_fraction <- function(number, precision = 3, improper = TRUE) {
-  if (as.integer(number) == as.numeric(number)) {
+  if (.isInteger(number)) {
     structure(list(whole = abs(as.integer(number)),
                    numerator = NULL,
                    denominator = NULL,
