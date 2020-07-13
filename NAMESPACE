@@ -3,6 +3,7 @@
 S3method(print,fraction)
 export(as_decimal)
 export(as_fraction)
+export(as_improper)
 export(common_factors)
 export(factors_of)
 export(least_common_multiple)

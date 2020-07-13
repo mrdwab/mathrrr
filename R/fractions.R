@@ -94,7 +94,7 @@ NULL
 #' @return A formatted `list` printed with `print.fraction()`. The `list`
 #' includes four elements:
 #' * `whole`: The absolute value of the whole number part of the decimal. This
-#' is `NULL` if `improper = TRUE`.
+#' is `0` if `improper = TRUE`.
 #' * `numerator`: The numerator of the resulting fraction.
 #' * `denominator`: The denominator of the resulting fraction.
 #' * `sign`: `-1` if the input is negative; `1` if the input is positive.
@@ -181,5 +181,54 @@ parse_fraction <- function(string, improper = TRUE, reduce = TRUE) {
                  denominator = denominator,
                  sign = whole_sign),
             class = c("fraction", cl, "list"))
+}
+NULL
+
+#' Converts a Parsed Fraction to Improper
+#'
+#' Given a fraction parsed using [parse_fraction()], this function will
+#' check to see whether it is in its improper form, and if not, it will
+#' convert it to an improper fraction.
+#'
+#' @param fraction The input fraction, already parsed, or a string to
+#' be parsed using `parse_fraction(fraction, improper = TRUE, reduce = FALSE)`.
+#'
+#' @examples
+#' frac <- "-3 1/2"
+#' as_improper(frac)
+#'
+#' p_frac <- parse_fraction(frac, improper = FALSE)
+#' as_improper(p_frac)
+#'
+#' as_improper("3")
+#'
+#' @export
+as_improper <- function(fraction) {
+  if (is.character(fraction)) {
+    parse_fraction(string = fraction, improper = TRUE, reduce = FALSE)
+  } else {
+    if (!"fraction" %in% class(fraction)) stop("
+This function is to be used for fractions only")
+    type <- intersect(class(fraction), c("whole", "proper", "improper"))
+    cl <- c("fraction", "improper", "list")
+    switch(
+      type,
+      whole = {
+        structure(list(
+          whole = 0, numerator = fraction[["whole"]],
+          denominator = 1, sign = fraction[["sign"]]), class = cl)
+      },
+      proper = {
+        if (fraction[["whole"]] == 0) {
+          `class<-`(fraction, cl)
+        } else {
+          structure(list(
+            whole = 0,
+            numerator = (fraction[["denominator"]] * fraction[["whole"]]) + fraction[["numerator"]],
+            denominator = fraction[["denominator"]], sign = fraction[["sign"]]), class = cl)
+        }
+      },
+      improper = fraction)
+  }
 }
 NULL

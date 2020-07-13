@@ -20,7 +20,7 @@ A formatted \code{list} printed with \code{print.fraction()}. The \code{list}
 includes four elements:
 \itemize{
 \item \code{whole}: The absolute value of the whole number part of the decimal. This
-is \code{NULL} if \code{improper = TRUE}.
+is \code{0} if \code{improper = TRUE}.
 \item \code{numerator}: The numerator of the resulting fraction.
 \item \code{denominator}: The denominator of the resulting fraction.
 \item \code{sign}: \code{-1} if the input is negative; \code{1} if the input is positive.
