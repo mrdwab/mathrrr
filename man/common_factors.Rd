@@ -9,12 +9,18 @@ common_factors(..., greatest = FALSE)
 \arguments{
 \item{\dots}{The numbers that you want to get the common factors of.}
 
-\item{greatest}{Logical. Should the result be only the greatest common factor? Defaults to \code{FALSE}.}
+\item{greatest}{Logical. Should the result be only the greatest
+common factor? Defaults to \code{FALSE}.}
+}
+\value{
+A numeric vector.
 }
 \description{
-Common Factors of Multiple Numbers
+The \code{common_factors} function takes a set of numbers and identifies
+the common factors between them. It can also be used to identify the
+greatest common factor of a set of numbers.
 }
 \examples{
 common_factors(18, 48)
-common_factors(25, 50, 100)
+common_factors(25, 50, 100, greatest = TRUE)
 }

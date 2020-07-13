@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Common Factors of Multiple Numbers — common_factors" />
-<meta property="og:description" content="Common Factors of Multiple Numbers" />
+<meta property="og:description" content="The common_factors function takes a set of numbers and identifies
+the common factors between them. It can also be used to identify the
+greatest common factor of a set of numbers." />
 
 
 
@@ -114,7 +116,9 @@
     </div>
 
     <div class="ref-description">
-    <p>Common Factors of Multiple Numbers</p>
+    <p>The <code>common_factors</code> function takes a set of numbers and identifies
+the common factors between them. It can also be used to identify the
+greatest common factor of a set of numbers.</p>
     </div>
 
     <pre class="usage"><span class='fu'>common_factors</span>(<span class='kw'>...</span>, greatest = <span class='fl'>FALSE</span>)</pre>
@@ -128,13 +132,17 @@
     </tr>
     <tr>
       <th>greatest</th>
-      <td><p>Logical. Should the result be only the greatest common factor? Defaults to <code>FALSE</code>.</p></td>
+      <td><p>Logical. Should the result be only the greatest
+common factor? Defaults to <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A numeric vector.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>common_factors</span>(<span class='fl'>18</span>, <span class='fl'>48</span>)</div><div class='output co'>#&gt; [1] 1 2 3 6</div><div class='input'><span class='fu'>common_factors</span>(<span class='fl'>25</span>, <span class='fl'>50</span>, <span class='fl'>100</span>)</div><div class='output co'>#&gt; [1]  1  5 25</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>common_factors</span>(<span class='fl'>18</span>, <span class='fl'>48</span>)</div><div class='output co'>#&gt; [1] 1 2 3 6</div><div class='input'><span class='fu'>common_factors</span>(<span class='fl'>25</span>, <span class='fl'>50</span>, <span class='fl'>100</span>, greatest = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 25</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

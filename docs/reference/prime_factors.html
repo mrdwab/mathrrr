@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Prime Factors of a Number — prime_factors" />
-<meta property="og:description" content="Prime Factors of a Number" />
+<meta property="og:description" content="The prime_factors function is used to calculate the prime factors of
+a positive integer greater than 1." />
 
 
 
@@ -114,7 +115,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Prime Factors of a Number</p>
+    <p>The <code>prime_factors</code> function is used to calculate the prime factors of
+a positive integer greater than 1.</p>
     </div>
 
     <pre class="usage"><span class='fu'>prime_factors</span>(<span class='kw'>x</span>, unique = <span class='fl'>TRUE</span>)</pre>
@@ -134,6 +136,12 @@ Defaults to <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A numeric vector either with the repeated prime factorization
+of the input or just the unique prime factors of the input.</p>
+<p>NOTE: Returns <code>NULL</code> for a value of 1, and generates an error for
+values less than 1.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>prime_factors</span>(<span class='fl'>100</span>, unique = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 2 2 5 5</div><div class='input'><span class='fu'>prime_factors</span>(<span class='fl'>100</span>)</div><div class='output co'>#&gt; [1] 2 5</div></pre>

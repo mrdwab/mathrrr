@@ -9,8 +9,12 @@ factors_of(x)
 \arguments{
 \item{x}{The number that you want to find the factors of.}
 }
+\value{
+A numeric vector.
+}
 \description{
-All Factors of a Number
+The \code{factors_of} function returns a numeric vector of the factors of a
+provided number.
 }
 \examples{
 factors_of(8)

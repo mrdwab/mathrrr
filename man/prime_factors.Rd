@@ -13,8 +13,16 @@ prime_factors(x, unique = TRUE)
 (where \code{prod(prime_factors(x)) == x}) or just the unique prime factors?
 Defaults to \code{TRUE}.}
 }
+\value{
+A numeric vector either with the repeated prime factorization
+of the input or just the unique prime factors of the input.
+
+NOTE: Returns \code{NULL} for a value of 1, and generates an error for
+values less than 1.
+}
 \description{
-Prime Factors of a Number
+The \code{prime_factors} function is used to calculate the prime factors of
+a positive integer greater than 1.
 }
 \examples{
 prime_factors(100, unique = FALSE)
