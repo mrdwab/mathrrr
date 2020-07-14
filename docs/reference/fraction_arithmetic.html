@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert Fractions to Proper Fractions — as_proper • mathrrr</title>
+<title>Basic Arithmetic with Fractions — fraction_arithmetic • mathrrr</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Convert Fractions to Proper Fractions — as_proper" />
-<meta property="og:description" content="Given a string or a fraction parsed using parse_fraction(), this
-function will check to see whether it is in its proper (simplified) form,
-and if not, it will convert it to a proper reduced fraction." />
+<meta property="og:title" content="Basic Arithmetic with Fractions — fraction_arithmetic" />
+<meta property="og:description" content="Functions for doing basic arithmetic with fractions." />
 
 
 
@@ -110,32 +108,57 @@ and if not, it will convert it to a proper reduced fraction." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert Fractions to Proper Fractions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mrdwab/mathrrr/blob/master/R/fractions.R'><code>R/fractions.R</code></a></small>
-    <div class="hidden name"><code>as_proper.Rd</code></div>
+    <h1>Basic Arithmetic with Fractions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrdwab/mathrrr/blob/master/R/fraction_operations.R'><code>R/fraction_operations.R</code></a></small>
+    <div class="hidden name"><code>fraction_arithmetic.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Given a string or a fraction parsed using <code>parse_fraction()</code>, this
-function will check to see whether it is in its proper (simplified) form,
-and if not, it will convert it to a proper reduced fraction.</p>
+    <p>Functions for doing basic arithmetic with fractions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_proper</span>(<span class='kw'>fraction</span>)</pre>
+    <pre class="usage"><span class='fu'>add_fractions</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>)
+
+<span class='fu'>subtract_fractions</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>)
+
+<span class='fu'>multiply_fractions</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>)
+
+<span class='fu'>divide_fractions</span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>)
+
+<span class='kw'>x1</span> <span class='op'>%f+%</span> <span class='kw'>x2</span>
+
+<span class='kw'>x1</span> <span class='op'>%f-%</span> <span class='kw'>x2</span>
+
+<span class='kw'>x1</span> <span class='op'>%f*%</span> <span class='kw'>x2</span>
+
+<span class='kw'>x1</span> <span class='op'>%f/%</span> <span class='kw'>x2</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fraction</th>
-      <td><p>The input fraction, already parsed, or a string to
-be parsed using <code>parse_fraction(fraction, improper = FALSE, reduce = TRUE)</code>.</p></td>
+      <th>x1</th>
+      <td><p>The first fraction to be used.</p></td>
+    </tr>
+    <tr>
+      <th>x2</th>
+      <td><p>The second fraction to be used.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>as_proper</span>(<span class='st'>"17/2"</span>)</div><div class='output co'>#&gt; [1] "8 1/2"</div><div class='input'></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Use as a function</span>
+<span class='fu'>add_fractions</span>(<span class='st'>"1/2"</span>, <span class='st'>"1/4"</span>)</div><div class='output co'>#&gt; [1] "3/4"</div><div class='input'>
+<span class='co'># Use with the defined infix operator</span>
+<span class='st'>"1/8"</span> <span class='op'>%f+%</span> <span class='st'>"2/3"</span></div><div class='output co'>#&gt; [1] "19/24"</div><div class='input'>
+<span class='st'>"1/2"</span> <span class='op'>%f/%</span> <span class='st'>"1/2"</span></div><div class='output co'>#&gt; [1] "1"</div><div class='input'>
+<span class='co'># Infix operators can be chained</span>
+<span class='co'># Operations go from left to right</span>
+<span class='st'>"-2"</span> <span class='op'>%f-%</span> <span class='st'>"1/2"</span> <span class='op'>%f+%</span> <span class='st'>"2 1/3"</span></div><div class='output co'>#&gt; [1] "-1/6"</div><div class='input'>
+<span class='co'># Use parentheses to control order of operations</span>
+<span class='st'>"-2"</span> <span class='op'>%f-%</span> <span class='st'>"1/2"</span> <span class='op'>%f+%</span> <span class='st'>"2 1/3"</span> <span class='op'>%f*%</span> <span class='st'>"2"</span></div><div class='output co'>#&gt; [1] "-1/3"</div><div class='input'>
+<span class='st'>"-2"</span> <span class='op'>%f-%</span> <span class='st'>"1/2"</span> <span class='op'>%f+%</span> (<span class='st'>"2 1/3"</span> <span class='op'>%f*%</span> <span class='st'>"2"</span>)</div><div class='output co'>#&gt; [1] "2 1/6"</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

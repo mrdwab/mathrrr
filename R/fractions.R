@@ -77,10 +77,10 @@ NULL
 #' as_decimal(x)
 #' @export
 as_decimal <- function(fraction) {
-  if (is.character(fraction)) {
+  tmp <- if (is.character(fraction)) {
     tmp <- parse_fraction(string = fraction, improper = TRUE, reduce = TRUE)
   } else {
-    tmp <- fraction
+    fraction
   }
   if ("whole" %in% class(tmp)) {
     tmp[["sign"]] * tmp[["whole"]]
@@ -197,9 +197,9 @@ NULL
 
 #' Converts a Parsed Fraction to Improper
 #'
-#' Given a fraction parsed using [parse_fraction()], this function will
-#' check to see whether it is in its improper form, and if not, it will
-#' convert it to an improper fraction.
+#' Given a string or a fraction parsed using [parse_fraction()], this
+#' function will check to see whether it is in its improper form, and
+#' if not, it will convert it to an improper fraction.
 #'
 #' @param fraction The input fraction, already parsed, or a string to
 #' be parsed using `parse_fraction(fraction, improper = TRUE, reduce = FALSE)`.
@@ -215,82 +215,93 @@ NULL
 #'
 #' @export
 as_improper <- function(fraction) {
-  if (is.character(fraction)) {
+  fraction <- if (is.character(fraction)) {
     parse_fraction(string = fraction, improper = TRUE, reduce = FALSE)
   } else {
-    if (!"fraction" %in% class(fraction)) stop("
-This function is to be used for fractions only")
-    type <- intersect(class(fraction), c("whole", "proper", "improper"))
-    cl <- c("fraction", "improper", "list")
-    switch(
-      type,
-      whole = {
-        structure(list(
-          whole = 0, numerator = fraction[["whole"]],
-          denominator = 1, sign = fraction[["sign"]]), class = cl)
-      },
-      proper = {
-        if (fraction[["whole"]] == 0) {
-          `class<-`(fraction, cl)
-        } else {
-          structure(list(
-            whole = 0,
-            numerator = (fraction[["denominator"]] * fraction[["whole"]]) + fraction[["numerator"]],
-            denominator = fraction[["denominator"]], sign = fraction[["sign"]]), class = cl)
-        }
-      },
-      improper = fraction)
+    fraction
   }
+  if (!"fraction" %in% class(fraction)) stop("
+This function is to be used for fractions only")
+  type <- intersect(class(fraction), c("whole", "proper", "improper"))
+  cl <- c("fraction", "improper", "list")
+  out <- switch(
+    type,
+    whole = {
+      structure(list(
+        whole = 0, numerator = fraction[["whole"]],
+        denominator = 1, sign = fraction[["sign"]]), class = cl)
+    },
+    proper = {
+      if (fraction[["whole"]] == 0) {
+        `class<-`(fraction, cl)
+      } else {
+        structure(list(
+          whole = 0,
+          numerator = (fraction[["denominator"]] * fraction[["whole"]]) + fraction[["numerator"]],
+          denominator = fraction[["denominator"]], sign = fraction[["sign"]]), class = cl)
+      }
+    },
+    improper = fraction)
+  out
 }
 NULL
 
 #' Convert Fractions to Proper Fractions
 #'
+#' Given a string or a fraction parsed using [parse_fraction()], this
+#' function will check to see whether it is in its proper (simplified) form,
+#' and if not, it will convert it to a proper reduced fraction.
+#'
 #' @param fraction The input fraction, already parsed, or a string to
 #' be parsed using `parse_fraction(fraction, improper = FALSE, reduce = TRUE)`.
 #'
+#' @examples
+#' as_proper("17/2")
+#'
 #' @export
 as_proper <- function(fraction) {
-  if (is.character(fraction)) {
-    parse_fraction(string = fraction, improper = FALSE, reduce = TRUE)
+  fraction <- if (is.character(fraction)) {
+    parse_fraction(string = fraction, improper = TRUE, reduce = FALSE)
   } else {
-    if (!"fraction" %in% class(fraction)) stop("
-This function is to be used for fractions only")
-    type <- intersect(class(fraction), c("whole", "proper", "improper"))
-
-    pf <- function(fraction) {
-      denominator <- fraction[["denominator"]]
-      numerator <- fraction[["numerator"]]
-      whole <- 0L
-      whole_sign <- fraction[["sign"]]
-      if (numerator > denominator) {
-        whole <- whole + (numerator %/% denominator)
-        numerator <- numerator %% denominator
-      } else if (numerator < denominator) {
-        numerator <- numerator
-      } else if (numerator == denominator ) {
-        whole <- whole + 1
-        numerator <- 0L
-        denominator <- 0L
-      }
-      tmp <- .frac_reduce(whole, numerator, denominator, "proper")
-      numerator <- tmp[["numerator"]]
-      denominator <- tmp[["denominator"]]
-      whole <- tmp[["whole"]]
-      cl <- tmp[["cl"]]
-      structure(list(whole = whole,
-                     numerator = numerator,
-                     denominator = denominator,
-                     sign = whole_sign),
-                class = c("fraction", cl, "list"))
-    }
-
-    switch(
-      type,
-      whole = fraction,
-      proper = fraction,
-      improper = pf(fraction))
+    fraction
   }
+  if (!"fraction" %in% class(fraction)) stop("
+This function is to be used for fractions only")
+  type <- intersect(class(fraction), c("whole", "proper", "improper"))
+
+  pf <- function(fraction) {
+    denominator <- fraction[["denominator"]]
+    numerator <- fraction[["numerator"]]
+    whole <- 0L
+    whole_sign <- fraction[["sign"]]
+    if (numerator > denominator) {
+      whole <- whole + (numerator %/% denominator)
+      numerator <- numerator %% denominator
+    } else if (numerator < denominator) {
+      numerator <- numerator
+    } else if (numerator == denominator ) {
+      whole <- whole + 1
+      numerator <- 0L
+      denominator <- 0L
+    }
+    tmp <- .frac_reduce(whole, numerator, denominator, "proper")
+    numerator <- tmp[["numerator"]]
+    denominator <- tmp[["denominator"]]
+    whole <- tmp[["whole"]]
+    cl <- tmp[["cl"]]
+    structure(list(whole = whole,
+                   numerator = numerator,
+                   denominator = denominator,
+                   sign = whole_sign),
+              class = c("fraction", cl, "list"))
+  }
+
+  out <- switch(
+    type,
+    whole = fraction,
+    proper = fraction,
+    improper = pf(fraction))
+  out
 }
 NULL
 

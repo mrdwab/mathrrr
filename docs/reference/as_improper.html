@@ -40,9 +40,9 @@
 
 
 <meta property="og:title" content="Converts a Parsed Fraction to Improper — as_improper" />
-<meta property="og:description" content="Given a fraction parsed using parse_fraction(), this function will
-check to see whether it is in its improper form, and if not, it will
-convert it to an improper fraction." />
+<meta property="og:description" content="Given a string or a fraction parsed using parse_fraction(), this
+function will check to see whether it is in its improper form, and
+if not, it will convert it to an improper fraction." />
 
 
 
@@ -116,9 +116,9 @@ convert it to an improper fraction." />
     </div>
 
     <div class="ref-description">
-    <p>Given a fraction parsed using <code>parse_fraction()</code>, this function will
-check to see whether it is in its improper form, and if not, it will
-convert it to an improper fraction.</p>
+    <p>Given a string or a fraction parsed using <code>parse_fraction()</code>, this
+function will check to see whether it is in its improper form, and
+if not, it will convert it to an improper fraction.</p>
     </div>
 
     <pre class="usage"><span class='fu'>as_improper</span>(<span class='kw'>fraction</span>)</pre>
@@ -139,7 +139,7 @@ be parsed using <code>parse_fraction(fraction, improper = TRUE, reduce = FALSE)<
 <span class='fu'>as_improper</span>(<span class='kw'>frac</span>)</div><div class='output co'>#&gt; [1] "-7/2"</div><div class='input'>
 <span class='kw'>p_frac</span> <span class='op'>&lt;-</span> <span class='fu'>parse_fraction</span>(<span class='kw'>frac</span>, improper = <span class='fl'>FALSE</span>)
 <span class='fu'>as_improper</span>(<span class='kw'>p_frac</span>)</div><div class='output co'>#&gt; [1] "-7/2"</div><div class='input'>
-<span class='fu'>as_improper</span>(<span class='st'>"3"</span>)</div><div class='output co'>#&gt; [1] "3"</div><div class='input'></div></pre>
+<span class='fu'>as_improper</span>(<span class='st'>"3"</span>)</div><div class='output co'>#&gt; [1] "3/1"</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

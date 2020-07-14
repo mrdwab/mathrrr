@@ -42,6 +42,11 @@
 
 .isInteger <- function(x) all(as.numeric(x) == as.integer(x))
 
+.reciprocal <- function(x) {
+  x[c("numerator", "denominator")] <- x[c("denominator", "numerator")]
+  x
+}
+
 #' @export
 print.fraction <- function(x, ...) {
   cl <- intersect(class(x), c("improper", "proper", "whole"))

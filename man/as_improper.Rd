@@ -11,9 +11,9 @@ as_improper(fraction)
 be parsed using \code{parse_fraction(fraction, improper = TRUE, reduce = FALSE)}.}
 }
 \description{
-Given a fraction parsed using \code{\link[=parse_fraction]{parse_fraction()}}, this function will
-check to see whether it is in its improper form, and if not, it will
-convert it to an improper fraction.
+Given a string or a fraction parsed using \code{\link[=parse_fraction]{parse_fraction()}}, this
+function will check to see whether it is in its improper form, and
+if not, it will convert it to an improper fraction.
 }
 \examples{
 frac <- "-3 1/2"

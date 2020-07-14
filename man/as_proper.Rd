@@ -11,5 +11,11 @@ as_proper(fraction)
 be parsed using \code{parse_fraction(fraction, improper = FALSE, reduce = TRUE)}.}
 }
 \description{
-Convert Fractions to Proper Fractions
+Given a string or a fraction parsed using \code{\link[=parse_fraction]{parse_fraction()}}, this
+function will check to see whether it is in its proper (simplified) form,
+and if not, it will convert it to a proper reduced fraction.
+}
+\examples{
+as_proper("17/2")
+
 }
