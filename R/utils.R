@@ -49,12 +49,12 @@
 
 #' @export
 print.fraction <- function(x, ...) {
-  cl <- intersect(class(x), c("improper", "proper", "whole"))
+  cl <- intersect(class(x), c("improper", "simplified", "whole"))
   out <- switch(
     cl,
     improper = sprintf("%s/%s", format(x[["numerator"]] * x[["sign"]], scientific = FALSE),
                        format(x[["denominator"]], scientific = FALSE)),
-    proper = if (x[["whole"]] == 0) {
+    simplified = if (x[["whole"]] == 0) {
       sprintf("%s/%s", format(x[["sign"]] * x[["numerator"]], scientific = FALSE),
               format(x[["denominator"]], scientific = FALSE))
     } else {

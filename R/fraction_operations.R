@@ -41,7 +41,7 @@ add_fractions <- function(x1, x2) {
     denominator = gcd,
     sign = sign(numerator)),
     class = c("list", "fraction", "improper"))
-  as_proper(out)
+  as_simplified(out)
 }
 NULL
 
@@ -60,7 +60,7 @@ subtract_fractions <- function(x1, x2) {
     denominator = gcd,
     sign = sign(numerator)),
     class = c("list", "fraction", "improper"))
-  as_proper(out)
+  as_simplified(out)
 }
 NULL
 
@@ -75,7 +75,7 @@ multiply_fractions <- function(x1, x2) {
     denominator = e1[["denominator"]] * e2[["denominator"]],
     sign = e1[["sign"]] * e2[["sign"]]),
     class = c("list", "fraction", "improper"))
-  as_proper(out)
+  as_simplified(out)
 }
 NULL
 

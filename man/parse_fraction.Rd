@@ -33,7 +33,7 @@ it. This will allow the parsed fraction to be used in subsequent calculations.
 }
 \note{
 The string can be entered either as an improper fraction
-(for example, \code{"5/2"}) or as a proper fraction (for example,
+(for example, \code{"5/2"}) or as a simplified fraction (for example,
 \code{"2 1/2"}). Depending on how it is entered, the resulting \code{list}
 will have a value in \code{"whole"} or \code{"whole"} will be \code{NULL}.
 }

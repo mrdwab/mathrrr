@@ -2,7 +2,7 @@
 % Please edit documentation in R/fractions.R
 \name{as_improper}
 \alias{as_improper}
-\title{Converts a Parsed Fraction to Improper}
+\title{Converts a Parsed Fraction to an Improper Fraction}
 \usage{
 as_improper(fraction)
 }

@@ -40,19 +40,14 @@ as_fraction <- function(number, precision = 3, improper = TRUE) {
 
     fraction <- .frac(decimal, den = NULL)
 
-    if (isTRUE(improper)) {
-      structure(list(whole = NULL,
-                     numerator = (whole * fraction[[2]]) + fraction[[1]],
-                     denominator = fraction[[2]],
-                     sign = whole_sign),
-                class = c("fraction", "improper", "list"))
-    } else {
-      structure(list(whole = whole,
-                     numerator = fraction[[1]],
-                     denominator = fraction[[2]],
-                     sign = whole_sign),
-                class = c("fraction", "proper", "list"))
-    }
+    out <- structure(list(
+      whole = NULL,
+      numerator = (whole * fraction[[2]]) + fraction[[1]],
+      denominator = fraction[[2]],
+      sign = whole_sign),
+      class = c("fraction", "improper", "list"))
+
+    if (improper) out else as_simplified(out)
   }
 }
 NULL
@@ -111,7 +106,7 @@ NULL
 #' * `sign`: `-1` if the input is negative; `1` if the input is positive.
 #'
 #' @note The string can be entered either as an improper fraction
-#' (for example, `"5/2"`) or as a proper fraction (for example,
+#' (for example, `"5/2"`) or as a simplified fraction (for example,
 #' `"2 1/2"`). Depending on how it is entered, the resulting `list`
 #' will have a value in `"whole"` or `"whole"` will be `NULL`.
 #'
@@ -140,7 +135,7 @@ parse_fraction <- function(string, improper = TRUE, reduce = TRUE) {
     a <- strsplit(string, "[ /]")[[1]]
     b <- as.integer(a)
     whole_sign <- sign(b[1])
-    cl <- if (improper) "improper" else "proper"
+    cl <- if (improper) "improper" else "simplified"
 
     if (length(b) == 3) {
       denominator <- b[3]
@@ -195,7 +190,7 @@ parse_fraction <- function(string, improper = TRUE, reduce = TRUE) {
 }
 NULL
 
-#' Converts a Parsed Fraction to Improper
+#' Converts a Parsed Fraction to an Improper Fraction
 #'
 #' Given a string or a fraction parsed using [parse_fraction()], this
 #' function will check to see whether it is in its improper form, and
@@ -222,7 +217,7 @@ as_improper <- function(fraction) {
   }
   if (!"fraction" %in% class(fraction)) stop("
 This function is to be used for fractions only")
-  type <- intersect(class(fraction), c("whole", "proper", "improper"))
+  type <- intersect(class(fraction), c("whole", "simplified", "improper"))
   cl <- c("fraction", "improper", "list")
   out <- switch(
     type,
@@ -231,7 +226,7 @@ This function is to be used for fractions only")
         whole = 0, numerator = fraction[["whole"]],
         denominator = 1, sign = fraction[["sign"]]), class = cl)
     },
-    proper = {
+    simplified = {
       if (fraction[["whole"]] == 0) {
         `class<-`(fraction, cl)
       } else {
@@ -246,20 +241,21 @@ This function is to be used for fractions only")
 }
 NULL
 
-#' Convert Fractions to Proper Fractions
+#' Simplifies Parsed Fractions to Proper or Mixed Fraction Form
 #'
 #' Given a string or a fraction parsed using [parse_fraction()], this
-#' function will check to see whether it is in its proper (simplified) form,
-#' and if not, it will convert it to a proper reduced fraction.
+#' function will check to see whether it is in its simplified form,
+#' and if not, it will convert it to a proper or mixed fraction, depending
+#' on whether the parsed number has a whole number component.
 #'
 #' @param fraction The input fraction, already parsed, or a string to
 #' be parsed using `parse_fraction(fraction, improper = FALSE, reduce = TRUE)`.
 #'
 #' @examples
-#' as_proper("17/2")
+#' as_simplified("17/2")
 #'
 #' @export
-as_proper <- function(fraction) {
+as_simplified <- function(fraction) {
   fraction <- if (is.character(fraction)) {
     parse_fraction(string = fraction, improper = TRUE, reduce = FALSE)
   } else {
@@ -267,7 +263,7 @@ as_proper <- function(fraction) {
   }
   if (!"fraction" %in% class(fraction)) stop("
 This function is to be used for fractions only")
-  type <- intersect(class(fraction), c("whole", "proper", "improper"))
+  type <- intersect(class(fraction), c("whole", "simplified", "improper"))
 
   pf <- function(fraction) {
     denominator <- fraction[["denominator"]]
@@ -284,7 +280,7 @@ This function is to be used for fractions only")
       numerator <- 0L
       denominator <- 0L
     }
-    tmp <- .frac_reduce(whole, numerator, denominator, "proper")
+    tmp <- .frac_reduce(whole, numerator, denominator, "simplified")
     numerator <- tmp[["numerator"]]
     denominator <- tmp[["denominator"]]
     whole <- tmp[["whole"]]
@@ -299,7 +295,7 @@ This function is to be used for fractions only")
   out <- switch(
     type,
     whole = fraction,
-    proper = fraction,
+    simplified = fraction,
     improper = pf(fraction))
   out
 }
