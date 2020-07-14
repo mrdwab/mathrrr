@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert a Fraction to a Decimal — as_decimal • mathrrr</title>
+<title>Convert Fractions to Proper Fractions — as_proper • mathrrr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Convert a Fraction to a Decimal — as_decimal" />
-<meta property="og:description" content="The as_decimal function parses a string and evaluates the result to
-return a numeric approximation." />
+<meta property="og:title" content="Convert Fractions to Proper Fractions — as_proper" />
+<meta property="og:description" content="Convert Fractions to Proper Fractions" />
 
 
 
@@ -109,17 +108,16 @@ return a numeric approximation." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert a Fraction to a Decimal</h1>
+    <h1>Convert Fractions to Proper Fractions</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrdwab/mathrrr/blob/master/R/fractions.R'><code>R/fractions.R</code></a></small>
-    <div class="hidden name"><code>as_decimal.Rd</code></div>
+    <div class="hidden name"><code>as_proper.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>as_decimal</code> function parses a string and evaluates the result to
-return a numeric approximation.</p>
+    <p>Convert Fractions to Proper Fractions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_decimal</span>(<span class='kw'>fraction</span>)</pre>
+    <pre class="usage"><span class='fu'>as_proper</span>(<span class='kw'>fraction</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,21 +125,11 @@ return a numeric approximation.</p>
     <tr>
       <th>fraction</th>
       <td><p>The input fraction, already parsed, or a string to
-be parsed using <code>parse_fraction(fraction, improper = TRUE, reduce = TRUE)</code>.</p></td>
+be parsed using <code>parse_fraction(fraction, improper = FALSE, reduce = TRUE)</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A numeric (possible approximation) of the fraction converted
-to a numeric value.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># String as input</span>
-<span class='fu'>as_decimal</span>(<span class='st'>"2 3/8"</span>)</div><div class='output co'>#&gt; [1] 2.375</div><div class='input'>
-<span class='co'># Parsed fraction as input</span>
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>as_improper</span>(<span class='st'>"-1 1/3"</span>)
-<span class='fu'>as_decimal</span>(<span class='kw'>x</span>)</div><div class='output co'>#&gt; [1] -1.333333</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

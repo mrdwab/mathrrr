@@ -4,10 +4,11 @@
 \alias{as_decimal}
 \title{Convert a Fraction to a Decimal}
 \usage{
-as_decimal(string)
+as_decimal(fraction)
 }
 \arguments{
-\item{string}{The input string to be converted to a decimal.}
+\item{fraction}{The input fraction, already parsed, or a string to
+be parsed using \code{parse_fraction(fraction, improper = TRUE, reduce = TRUE)}.}
 }
 \value{
 A numeric (possible approximation) of the fraction converted
@@ -18,5 +19,10 @@ The \code{as_decimal} function parses a string and evaluates the result to
 return a numeric approximation.
 }
 \examples{
+# String as input
 as_decimal("2 3/8")
+
+# Parsed fraction as input
+x <- as_improper("-1 1/3")
+as_decimal(x)
 }

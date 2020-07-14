@@ -62,15 +62,26 @@ NULL
 #' The `as_decimal` function parses a string and evaluates the result to
 #' return a numeric approximation.
 #'
-#' @param string The input string to be converted to a decimal.
+#' @param fraction The input fraction, already parsed, or a string to
+#' be parsed using `parse_fraction(fraction, improper = TRUE, reduce = TRUE)`.
 #'
 #' @return A numeric (possible approximation) of the fraction converted
 #' to a numeric value.
+#'
 #' @examples
+#' # String as input
 #' as_decimal("2 3/8")
+#'
+#' # Parsed fraction as input
+#' x <- as_improper("-1 1/3")
+#' as_decimal(x)
 #' @export
-as_decimal <- function(string) {
-  tmp <- parse_fraction(string = string, improper = TRUE, reduce = TRUE)
+as_decimal <- function(fraction) {
+  if (is.character(fraction)) {
+    tmp <- parse_fraction(string = fraction, improper = TRUE, reduce = TRUE)
+  } else {
+    tmp <- fraction
+  }
   if ("whole" %in% class(tmp)) {
     tmp[["sign"]] * tmp[["whole"]]
   } else {
@@ -232,3 +243,56 @@ This function is to be used for fractions only")
   }
 }
 NULL
+
+#' Convert Fractions to Proper Fractions
+#'
+#' @param fraction The input fraction, already parsed, or a string to
+#' be parsed using `parse_fraction(fraction, improper = FALSE, reduce = TRUE)`.
+#'
+#' @export
+as_proper <- function(fraction) {
+  if (is.character(fraction)) {
+    parse_fraction(string = fraction, improper = FALSE, reduce = TRUE)
+  } else {
+    if (!"fraction" %in% class(fraction)) stop("
+This function is to be used for fractions only")
+    type <- intersect(class(fraction), c("whole", "proper", "improper"))
+
+    pf <- function(fraction) {
+      denominator <- fraction[["denominator"]]
+      numerator <- fraction[["numerator"]]
+      whole <- 0L
+      whole_sign <- fraction[["sign"]]
+      if (numerator > denominator) {
+        whole <- whole + (numerator %/% denominator)
+        numerator <- numerator %% denominator
+      } else if (numerator < denominator) {
+        numerator <- numerator
+      } else if (numerator == denominator ) {
+        whole <- whole + 1
+        numerator <- 0L
+        denominator <- 0L
+      }
+      tmp <- .frac_reduce(whole, numerator, denominator, "proper")
+      numerator <- tmp[["numerator"]]
+      denominator <- tmp[["denominator"]]
+      whole <- tmp[["whole"]]
+      cl <- tmp[["cl"]]
+      structure(list(whole = whole,
+                     numerator = numerator,
+                     denominator = denominator,
+                     sign = whole_sign),
+                class = c("fraction", cl, "list"))
+    }
+
+    switch(
+      type,
+      whole = fraction,
+      proper = fraction,
+      improper = pf(fraction))
+  }
+}
+NULL
+
+
+
