@@ -29,16 +29,12 @@ NULL
 #' @rdname fraction_arithmetic
 #' @export
 add_fractions <- function(x1, x2) {
-  e1 <- as_improper(x1)
-  e2 <- as_improper(x2)
-  gcd <- least_common_multiple(e1$denominator, e2$denominator)
-  e1$numerator <- e1$numerator * (gcd / e1$denominator) * e1$sign
-  e2$numerator <- e2$numerator * (gcd / e2$denominator) * e2$sign
-  numerator <- e1$numerator + e2$numerator
+  tmp <- .comparison(x1, x2)
+  numerator <- tmp$num1 + tmp$num2
   out <- structure(list(
     whole = 0,
     numerator = abs(numerator),
-    denominator = gcd,
+    denominator = tmp$gcd,
     sign = sign(numerator)),
     class = c("list", "fraction", "improper"))
   as_simplified(out)
@@ -48,16 +44,12 @@ NULL
 #' @rdname fraction_arithmetic
 #' @export
 subtract_fractions <- function(x1, x2) {
-  e1 <- as_improper(x1)
-  e2 <- as_improper(x2)
-  gcd <- least_common_multiple(e1$denominator, e2$denominator)
-  e1$numerator <- e1$numerator * (gcd / e1$denominator) * e1$sign
-  e2$numerator <- e2$numerator * (gcd / e2$denominator) * e2$sign
-  numerator <- e1$numerator - e2$numerator
+  tmp <- .comparison(x1, x2)
+  numerator <- tmp$num1 - tmp$num2
   out <- structure(list(
     whole = 0,
     numerator = abs(numerator),
-    denominator = gcd,
+    denominator = tmp$gcd,
     sign = sign(numerator)),
     class = c("list", "fraction", "improper"))
   as_simplified(out)

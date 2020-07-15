@@ -51,8 +51,9 @@
   e1 <- as_improper(x1)
   e2 <- as_improper(x2)
   gcd <- least_common_multiple(e1$denominator, e2$denominator)
-  list(e1$numerator * (gcd / e1$denominator) * e1$sign,
-       e2$numerator * (gcd / e2$denominator) * e2$sign)
+  list(num1 = e1$numerator * (gcd / e1$denominator) * e1$sign,
+       num2 = e2$numerator * (gcd / e2$denominator) * e2$sign,
+       gcd = gcd)
 }
 
 #' @export

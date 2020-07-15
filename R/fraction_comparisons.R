@@ -19,40 +19,41 @@ NULL
 #' @rdname fraction_comparison
 #' @export
 `%f<%` <- function(x1, x2) {
-  do.call("<", .comparison(x1, x2))
+  do.call("<", .comparison(x1, x2)[c("num1", "num2")])
 }
 NULL
 
 #' @rdname fraction_comparison
 #' @export
 `%f>%` <- function(x1, x2) {
-  do.call(">", .comparison(x1, x2))
+  do.call(">", .comparison(x1, x2)[c("num1", "num2")])
 }
 NULL
 
 #' @rdname fraction_comparison
 #' @export
 `%f<=%` <- function(x1, x2) {
-  do.call("<=", .comparison(x1, x2))
+  do.call("<=", .comparison(x1, x2)[c("num1", "num2")])
 }
 NULL
 
 #' @rdname fraction_comparison
 #' @export
 `%f>=%` <- function(x1, x2) {
-  do.call(">=", .comparison(x1, x2))
+  do.call(">=", .comparison(x1, x2)[c("num1", "num2")])
 }
 NULL
 
 #' @rdname fraction_comparison
 #' @export
 `%f==%` <- function(x1, x2) {
-  do.call("==", .comparison(x1, x2))
+  do.call("==", .comparison(x1, x2)[c("num1", "num2")])
 }
 NULL
 
 #' @rdname fraction_comparison
 #' @export
 `%f!=%` <- function(x1, x2) {
-  do.call("!=", .comparison(x1, x2))
+  do.call("!=", .comparison(x1, x2)[c("num1", "num2")])
 }
+NULL
