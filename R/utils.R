@@ -47,6 +47,14 @@
   x
 }
 
+.comparison <- function(x1, x2) {
+  e1 <- as_improper(x1)
+  e2 <- as_improper(x2)
+  gcd <- least_common_multiple(e1$denominator, e2$denominator)
+  list(e1$numerator * (gcd / e1$denominator) * e1$sign,
+       e2$numerator * (gcd / e2$denominator) * e2$sign)
+}
+
 #' @export
 print.fraction <- function(x, ...) {
   cl <- intersect(class(x), c("improper", "simplified", "whole"))
