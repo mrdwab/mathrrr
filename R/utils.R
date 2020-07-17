@@ -1,4 +1,13 @@
 # Fraction Helpers --------------------------------------------------------
+
+#' Function to Reduce Fractional Part of Fractions
+#'
+#' @param who The whole number part of the fraction
+#' @param num The numerator of the fraction
+#' @param den The denominator of the fraction
+#' @param cla The class of the fraction
+#'
+#' @noRd
 .frac_reduce <- function(who, num, den, cla) {
   whole <- who
   cl <- cla
@@ -24,6 +33,18 @@
        denominator = if (cl == "whole") NULL else denominator, cl = cl)
 }
 
+#' Reduces an Integer Representing the Decimal Part of a Number to a Fraction
+#'
+#' @param num The initial integer
+#' @param den The initial denominator. Defaults to `NULL`.
+#'
+#' @note This recursively reduces the numerator and denominator
+#' of the initial integer. For example, starting with `num = 124`,
+#' `den` will be automatically calculated to be 1000. This reduces
+#' to `num = 62, den = 500`, which can further be reduced to
+#' `num = 32, den = 250`,
+#'
+#' @noRd
 .frac <- function(num, den = NULL) {
   if (is.null(den)) den <- 10^nchar(num)
   a <- prime_factors(num)
@@ -38,13 +59,32 @@
   list(num, den)
 }
 
+#' Checks Whether the Input is an Integer
+#'
+#' @param x The value to be checked
+#'
+#' @noRd
 .isInteger <- function(x) all(as.numeric(x) == as.integer(x))
 
+#' Returns the Reciprocal of a Fraction
+#'
+#' @param x The fraction object
+#'
+#' @noRd
 .reciprocal <- function(x) {
   x[c("numerator", "denominator")] <- x[c("denominator", "numerator")]
   x
 }
 
+#' Prepares Two Fractions for Comparison
+#'
+#' Prepares two fractions for comparison by converting them using
+#' their greatest common denominator.
+#'
+#' @param x1 The first fraction.
+#' @param x2 The second fraction.
+#'
+#' @noRd
 .comparison <- function(x1, x2) {
   e1 <- as_improper(x1)
   e2 <- as_improper(x2)
@@ -54,6 +94,12 @@
        gcd = gcd)
 }
 
+#' Print Method for Fraction Objects
+#'
+#' @param x The input fraction object
+#' @param \dots Not used
+#'
+#' @noRd
 #' @export
 print.fraction <- function(x, ...) {
   cl <- intersect(class(x), c("improper", "simplified", "whole"))
@@ -75,6 +121,13 @@ print.fraction <- function(x, ...) {
 
 # Grouped Function Helpers ------------------------------------------------
 
+#' Splits Character Input Into Intervals
+#'
+#' @param intervals The input character vector
+#' @param sep The delimiter
+#' @param trim A pattern to be removed from the left and right of the input
+#'
+#' @noRd
 .grp_intervals <- function(intervals, sep, trim) {
   if (!is.null(sep)) {
     if (is.null(trim)) {
@@ -90,6 +143,12 @@ print.fraction <- function(x, ...) {
   }
 }
 
+#' Lower Boundary and Width of Interval Class
+#'
+#' @param intervals Intervals, as created using `.grp_intervals`
+#' @param ind The position of the desired interval class
+#'
+#' @noRd
 .grp_lw <- function(intervals, ind) {
   if (ind == 1) {
     L <- intervals[ind, 1]
