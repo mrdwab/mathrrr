@@ -75,13 +75,9 @@ as_decimal <- function(fraction) {
   tmp <- if (is.character(fraction)) {
     tmp <- parse_fraction(string = fraction, improper = TRUE, reduce = TRUE)
   } else {
-    fraction
+    as_improper(fraction)
   }
-  if ("whole" %in% class(tmp)) {
-    tmp[["sign"]] * tmp[["whole"]]
-  } else {
-    tmp[["sign"]] * (tmp[["numerator"]]/tmp[["denominator"]])
-  }
+  tmp[["sign"]] * (tmp[["numerator"]]/tmp[["denominator"]])
 }
 NULL
 
