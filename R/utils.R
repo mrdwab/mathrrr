@@ -1,3 +1,4 @@
+# Fraction Helpers --------------------------------------------------------
 .frac_reduce <- function(who, num, den, cla) {
   whole <- who
   cl <- cla
@@ -23,12 +24,10 @@
        denominator = if (cl == "whole") NULL else denominator, cl = cl)
 }
 
-
 .frac <- function(num, den = NULL) {
   if (is.null(den)) den <- 10^nchar(num)
   a <- prime_factors(num)
   b <- prime_factors(den)
-
   while (any(as.logical(intersect(a, b)))) {
     m <- prod(intersect(a, b))
     num <- num/m
@@ -36,7 +35,6 @@
     a <- prime_factors(num)
     b <- prime_factors(den)
   }
-
   list(num, den)
 }
 
@@ -74,3 +72,38 @@ print.fraction <- function(x, ...) {
     whole = format(x[["whole"]] * x[["sign"]], scientific = FALSE))
   print(out)
 }
+
+# Grouped Function Helpers ------------------------------------------------
+
+.grp_intervals <- function(intervals, sep, trim) {
+  if (!is.null(sep)) {
+    if (is.null(trim)) {
+      pattern <- ""
+    } else if (trim == "cut") {
+      pattern <- "\\[|\\]|\\(|\\)"
+    } else {
+      pattern <- trim
+    }
+    matrix(
+      as.numeric(unlist(strsplit(gsub(pattern, "", intervals), sep), use.names = FALSE)),
+      ncol = 2, byrow = TRUE)
+  }
+}
+
+.grp_lw <- function(intervals, ind) {
+  if (ind == 1) {
+    L <- intervals[ind, 1]
+    w <- abs(diff(intervals[ind, ]))
+  } else {
+    if (intervals[ind, 1] == intervals[(ind-1), 2]) {
+      L <- intervals[ind, 1]
+      w <- abs(diff(intervals[ind, ]))
+    } else {
+      L <- mean(c(intervals[ind, 1], intervals[(ind-1), 2]))
+      x <- abs(intervals[ind, 1] - L)
+      w <- abs((intervals[ind, 2] + x) - L)
+    }
+  }
+  list(L, w)
+}
+
